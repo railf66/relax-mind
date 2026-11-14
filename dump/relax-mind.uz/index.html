@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relax Mind — пространство для тишины</title>
+<meta name="description" content="Relax Mind — медитации, дыхательные практики и звуковые сессии для тех, кто хочет возвращаться в тело в конце дня. Ташкент.">
+<meta name="theme-color" content="#16232C">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Relax Mind — пространство для тишины">
+<meta property="og:description" content="Медитации, дыхательные практики и звуковые сессии для тех, кто хочет возвращаться в тело в конце дня.">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2316232C'/%3E%3Ccircle cx='50' cy='50' r='24' fill='%238FA998'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --ink-deep: #16232C;
+    --ink-mid: #1E3038;
+    --sage: #8FA998;
+    --sand: #D8B98C;
+    --clay: #C98A7D;
+    --paper: #EDEAE2;
+    --paper-dim: #C7C4BA;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", serif;
+    --sans: -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--ink-deep);
+    color: var(--paper);
+    font-family: var(--sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  a{ color: inherit; }
+
+  /* ---------- layout helpers ---------- */
+  .wrap{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  section{ position: relative; }
+
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sand);
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 28px;
+    background: linear-gradient(to bottom, rgba(22,35,44,0.92), rgba(22,35,44,0));
+    backdrop-filter: blur(2px);
+  }
+  nav .logo{
+    font-family: var(--serif);
+    font-size: 19px;
+    letter-spacing: 0.02em;
+  }
+  nav .logo em{ color: var(--sand); font-style: normal; }
+  nav ul{
+    list-style: none;
+    display: flex;
+    gap: 28px;
+  }
+  nav a{
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--paper-dim);
+    transition: color .25s ease;
+  }
+  nav a:hover, nav a:focus-visible{ color: var(--paper); }
+
+  .nav-toggle{
+    display: none;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(237,234,226,0.25);
+    border-radius: 8px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .nav-toggle span,
+  .nav-toggle span::before,
+  .nav-toggle span::after{
+    content: '';
+    position: absolute;
+    left: 9px;
+    right: 9px;
+    height: 1px;
+    background: var(--paper);
+    transition: transform .25s ease, opacity .25s ease, top .25s ease;
+  }
+  .nav-toggle span{ top: 17px; }
+  .nav-toggle span::before{ top: -7px; }
+  .nav-toggle span::after{ top: 7px; }
+  .nav-toggle[aria-expanded="true"] span{ background: transparent; }
+  .nav-toggle[aria-expanded="true"] span::before{ top: 0; transform: rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span::after{ top: 0; transform: rotate(-45deg); }
+
+  @media (max-width: 640px){
+    .nav-toggle{ display: block; }
+    nav ul{
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: min(72vw, 280px);
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+      background: var(--ink-mid);
+      box-shadow: -20px 0 40px rgba(0,0,0,0.3);
+      transform: translateX(100%);
+      transition: transform .3s ease;
+      z-index: 60;
+    }
+    nav ul[data-open="true"]{ transform: translateX(0); }
+    nav ul a{ font-size: 17px; }
+    .nav-backdrop{
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,22,27,0.55);
+      z-index: 55;
+    }
+    .nav-backdrop[data-open="true"]{ display: block; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 28px 80px;
+    background:
+      radial-gradient(circle at 50% 22%, rgba(143,169,152,0.16), transparent 60%),
+      var(--ink-deep);
+  }
+
+  .hero .eyebrow{ margin-bottom: 18px; }
+
+  .hero h1{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(34px, 6vw, 64px);
+    max-width: 14ch;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+  .hero h1 em{ font-style: italic; color: var(--sage); }
+
+  .hero p.sub{
+    margin-top: 22px;
+    max-width: 46ch;
+    color: var(--paper-dim);
+    font-size: 17px;
+  }
+
+  .hero .cta-row{
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .btn{
+    font-family: var(--sans);
+    font-size: 14px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: 1px solid rgba(237,234,226,0.25);
+    background: transparent;
+    color: var(--paper);
+    cursor: pointer;
+    transition: all .25s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn:hover, .btn:focus-visible{
+    border-color: var(--sage);
+    color: var(--sage);
+  }
+  .btn.primary{
+    background: var(--sage);
+    color: var(--ink-deep);
+    border-color: var(--sage);
+    font-weight: 600;
+  }
+  .btn.primary:hover, .btn.primary:focus-visible{
+    background: var(--paper);
+    border-color: var(--paper);
+    color: var(--ink-deep);
+  }
+
+  /* ---------- breathing signature element ---------- */
+  .breath-orb-wrap{
+    margin-top: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .breath-orb{
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, rgba(216,185,140,0.9), rgba(143,169,152,0.55) 60%, transparent 75%);
+    box-shadow: 0 0 60px rgba(143,169,152,0.25);
+    animation: idle-breathe 6s ease-in-out infinite;
+  }
+  @keyframes idle-breathe{
+    0%, 100%{ transform: scale(0.85); opacity: .75; }
+    50%{ transform: scale(1); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .breath-orb{ animation: none; }
+  }
+
+  /* ---------- practices ---------- */
+  .practices{
+    padding: 110px 0 100px;
+    background: var(--ink-deep);
+    border-top: 1px solid rgba(237,234,226,0.08);
+  }
+
+  .section-head{
+    max-width: 60ch;
+    margin-bottom: 56px;
+  }
+  .section-head h2{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(26px, 4vw, 38px);
+    margin-top: 12px;
+  }
+
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(237,234,226,0.08);
+    border: 1px solid rgba(237,234,226,0.08);
+  }
+  @media (max-width: 760px){
+    .cards{ grid-template-columns: 1fr; }
+  }
+  .card{
+    background: var(--ink-deep);
+    padding: 34px 28px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: background .25s ease;
+  }
+  .card:hover, .card:focus-visible{
+    background: var(--ink-mid);
+  }
+  .card .go{
+    margin-top: 16px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--sage);
+    text-transform: uppercase;
+  }
+  .card .mark{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--clay);
+    letter-spacing: 0.1em;
+  }
+  .card h3{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 22px;
+    margin: 14px 0 10px;
+  }
+  .card p{
+    color: var(--paper-dim);
+    font-size: 15px;
+  }
+
+  /* ---------- breathing tool ---------- */
+  .tool{
+    padding: 110px 0;
+    background: var(--ink-mid);
+    border-top: 1px solid rgba(237,234,226,0.08);
+  }
+  .tool-inner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  @media (max-width: 760px){
+    .tool-inner{ grid-template-columns: 1fr; gap: 48px; }
+  }
+
+  .tool-copy h2{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(26px, 4vw, 36px);
+    margin: 12px 0 16px;
+  }
+  .tool-copy p{ color: var(--paper-dim); margin-bottom: 24px; }
+
+  .tool-select{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .pill{
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(237,234,226,0.25);
+    background: transparent;
+    color: var(--paper-dim);
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .pill[aria-pressed="true"]{
+    background: var(--sage);
+    color: var(--ink-deep);
+    border-color: var(--sage);
+  }
+
+  .breath-stage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+  }
+
+  .breath-circle-outer{
+    position: relative;
+    width: 240px;
+    height: 240px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .breath-ring{
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(237,234,226,0.15);
+  }
+
+  .breath-circle{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, rgba(216,185,140,0.95), rgba(143,169,152,0.6) 65%, transparent 80%);
+    box-shadow: 0 0 70px rgba(143,169,152,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 1s ease-in-out;
+    transform: scale(0.7);
+  }
+
+  .breath-label{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-deep);
+  }
+  .breath-label.on-dark{ color: var(--paper); }
+
+  /* ---------- meditation candle ---------- */
+  .candle{
+    position: relative;
+    width: 46px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .wax{
+    width: 44px;
+    height: 96px;
+    border-radius: 7px 7px 4px 4px;
+    background: linear-gradient(to right, var(--paper-dim) 0%, var(--paper) 30%, var(--paper) 45%, var(--paper) 70%, var(--paper-dim) 100%);
+    box-shadow: inset -4px 0 8px rgba(22,35,44,0.15), inset 3px 0 6px rgba(255,255,255,0.25), 0 14px 28px rgba(0,0,0,0.35);
+    position: relative;
+  }
+  .wax::before{
+    content: '';
+    position: absolute;
+    top: -5px; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 12px;
+    border-radius: 50%;
+    background: var(--paper);
+  }
+  .drip{
+    position: absolute;
+    top: -4px;
+    width: 6px;
+    height: 0;
+    border-radius: 0 0 50% 50% / 0 0 70% 70%;
+    background: linear-gradient(to bottom, var(--paper) 0%, var(--paper-dim) 100%);
+    opacity: 0;
+    animation-play-state: paused;
+  }
+  .drip-a{ left: 6px; width: 5px; animation: wax-drip 9s ease-in 1.1s infinite; }
+  .drip-b{ left: 20px; width: 7px; animation: wax-drip 12s ease-in 4.4s infinite; }
+  .drip-c{ left: 32px; width: 5px; animation: wax-drip 10.5s ease-in 7.2s infinite; }
+  .candle.is-lit .drip{ animation-play-state: running; }
+  @keyframes wax-drip{
+    0%   { height: 0;   opacity: 0;   top: -4px; }
+    6%   { opacity: .9; }
+    42%  { height: 32px; opacity: .9;  top: -4px; }
+    70%  { height: 32px; opacity: .85; top: 8px; }
+    96%  { height: 32px; opacity: 0;   top: 16px; }
+    100% { height: 0;   opacity: 0;   top: -4px; }
+  }
+  .wick{
+    width: 3px;
+    height: 14px;
+    background: var(--ink-deep);
+    border-radius: 1px;
+  }
+  .flame{
+    position: relative;
+    width: 18px;
+    height: 26px;
+    margin-bottom: -2px;
+    opacity: 0;
+    transform: scale(0.15);
+    transform-origin: 50% 100%;
+    transition: transform .55s cubic-bezier(.34,1.56,.64,1), filter .6s ease, opacity .45s ease;
+    filter: drop-shadow(0 0 8px rgba(216,185,140,0.35)) drop-shadow(0 0 16px rgba(201,138,125,0.2));
+  }
+  .flame-outer{
+    position: absolute;
+    inset: 0;
+    border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+    background: radial-gradient(circle at 50% 36%, #FBEBCF 0%, var(--sand) 42%, var(--clay) 80%, rgba(201,138,125,0) 100%);
+    transform-origin: 50% 100%;
+    animation: flame-flicker-outer 2.8s ease-in-out infinite;
+  }
+  .flame-inner{
+    position: absolute;
+    left: 50%; bottom: 8%;
+    width: 46%; height: 56%;
+    margin-left: -23%;
+    border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+    background: radial-gradient(circle at 50% 42%, #FFFBF2 0%, #FDEED0 60%, rgba(253,238,208,0) 100%);
+    transform-origin: 50% 100%;
+    animation: flame-flicker-inner 2.3s ease-in-out infinite;
+  }
+  @keyframes flame-flicker-outer{
+    0%   { transform: translateX(0) rotate(0deg) scale(1,1); }
+    15%  { transform: translateX(-0.6px) rotate(-3deg) scale(0.95,1.05); }
+    30%  { transform: translateX(0.5px) rotate(2deg) scale(1.04,0.96); }
+    45%  { transform: translateX(-0.3px) rotate(-1.5deg) scale(0.97,1.03); }
+    60%  { transform: translateX(0.6px) rotate(3deg) scale(1.05,0.95); }
+    75%  { transform: translateX(-0.5px) rotate(-2deg) scale(0.96,1.04); }
+    90%  { transform: translateX(0.3px) rotate(1deg) scale(1.02,0.98); }
+    100% { transform: translateX(0) rotate(0deg) scale(1,1); }
+  }
+  @keyframes flame-flicker-inner{
+    0%, 100%{ transform: scale(1,1) translateX(0); opacity: 1; }
+    20%{ transform: scale(0.92,1.08) translateX(0.4px); opacity: .92; }
+    40%{ transform: scale(1.06,0.94) translateX(-0.3px); opacity: 1; }
+    60%{ transform: scale(0.95,1.05) translateX(0.3px); opacity: .95; }
+    80%{ transform: scale(1.03,0.97) translateX(-0.4px); opacity: 1; }
+  }
+  .candle.is-lit .flame{
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 16px rgba(216,185,140,0.6)) drop-shadow(0 0 34px rgba(201,138,125,0.4));
+  }
+  .candle.breath-in .flame{
+    filter: drop-shadow(0 0 20px rgba(216,185,140,0.7)) drop-shadow(0 0 40px rgba(201,138,125,0.45));
+  }
+  .candle.breath-out .flame{
+    filter: drop-shadow(0 0 13px rgba(216,185,140,0.5)) drop-shadow(0 0 28px rgba(201,138,125,0.3));
+  }
+  .candle.is-extinguishing .flame{
+    transform: scale(0.05);
+    opacity: 0;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .flame-outer, .flame-inner{ animation: none; }
+    .drip{ animation: none; }
+  }
+
+  .breath-timer{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--paper-dim);
+    letter-spacing: 0.08em;
+    min-height: 18px;
+  }
+
+  .wave-bars{
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 140px;
+  }
+  .wave-bars span{
+    width: 10px;
+    height: 14px;
+    border-radius: 6px;
+    background: linear-gradient(to top, var(--sage), var(--sand));
+    transition: height .35s ease;
+  }
+
+  /* ---------- about ---------- */
+  .about{
+    padding: 110px 0;
+    background: var(--ink-deep);
+    border-top: 1px solid rgba(237,234,226,0.08);
+  }
+  .about-inner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+  @media (max-width: 760px){
+    .about-inner{ grid-template-columns: 1fr; gap: 32px; }
+  }
+  .about h2{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(26px, 4vw, 36px);
+    margin: 12px 0 18px;
+  }
+  .about p{ color: var(--paper-dim); margin-bottom: 14px; }
+
+  .quote{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.5;
+    color: var(--paper);
+    border-left: 2px solid var(--sand);
+    padding-left: 22px;
+  }
+  .quote span{
+    display: block;
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 12px;
+    color: var(--paper-dim);
+    letter-spacing: 0.08em;
+  }
+
+  /* ---------- contact / footer ---------- */
+  .contact{
+    padding: 100px 0 60px;
+    background: var(--ink-mid);
+    border-top: 1px solid rgba(237,234,226,0.08);
+    text-align: center;
+  }
+  .contact h2{
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(26px, 4vw, 36px);
+    margin: 12px 0 20px;
+  }
+  .contact p{ color: var(--paper-dim); max-width: 44ch; margin: 0 auto 32px; }
+
+  footer{
+    padding: 30px 28px 40px;
+    background: var(--ink-mid);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--paper-dim);
+  }
+
+  .toast{
+    position: fixed;
+    left: 50%;
+    bottom: 32px;
+    transform: translate(-50%, 12px);
+    background: var(--paper);
+    color: var(--ink-deep);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 999px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease, transform .25s ease;
+    z-index: 80;
+  }
+  .toast[data-visible="true"]{
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  ::selection{ background: var(--sage); color: var(--ink-deep); }
+
+  :focus-visible{
+    outline: 2px solid var(--sage);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">relax<em>·</em>mind</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="navMenu"><span></span></button>
+  <ul id="navMenu">
+    <li><a href="#meditation">Медитация</a></li>
+    <li><a href="#tool">Дыхание</a></li>
+    <li><a href="#sound">Звук</a></li>
+    <li><a href="#about">О нас</a></li>
+    <li><a href="#contact">Связаться</a></li>
+  </ul>
+</nav>
+<div class="nav-backdrop" id="navBackdrop"></div>
+
+<section class="hero">
+  <div class="eyebrow">Тишина как навык</div>
+  <h1>Пространство, где ум <em>замедляется</em></h1>
+  <p class="sub">Медитации, дыхательные практики и звуковые сессии для тех, кто хочет возвращаться в тело в конце дня.</p>
+  <div class="cta-row">
+    <a href="#tool" class="btn primary">Начать дышать</a>
+    <a href="#practices" class="btn">Все практики</a>
+  </div>
+  <div class="breath-orb-wrap">
+    <div class="breath-orb" aria-hidden="true"></div>
+  </div>
+</section>
+
+<section class="practices" id="practices">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Что мы предлагаем</div>
+      <h2>Три способа замедлиться</h2>
+    </div>
+    <div class="cards">
+      <a class="card" href="#meditation">
+        <div class="mark">01</div>
+        <h3>Медитация</h3>
+        <p>Короткие и длинные практики для утра, работы и сна — без лишних слов, только направленное внимание.</p>
+        <div class="go">Открыть таймер →</div>
+      </a>
+      <a class="card" href="#tool">
+        <div class="mark">02</div>
+        <h3>Дыхание</h3>
+        <p>Управляемые дыхательные циклы, которые снимают тревогу за несколько минут и возвращают ясность.</p>
+        <div class="go">Открыть тренажёр →</div>
+      </a>
+      <a class="card" href="#sound">
+        <div class="mark">03</div>
+        <h3>Звук</h3>
+        <p>Тональные сессии и природные звуки, помогающие уму отпустить дневной шум.</p>
+        <div class="go">Открыть звуки →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="practices" id="meditation">
+  <div class="wrap tool-inner">
+    <div class="tool-copy">
+      <div class="eyebrow">Практика 01</div>
+      <h2>Таймер медитации</h2>
+      <p>Выберите длительность, нажмите «Начать» и просто сидите — мягкий колокол отметит начало и конец сессии. Пламя свечи горит ровно и слегка колышется в такт дыханию, пока вы наблюдаете.</p>
+      <div class="tool-select" role="group" aria-label="Выбор длительности медитации">
+        <button class="pill" data-mins="5" aria-pressed="true">5 минут</button>
+        <button class="pill" data-mins="10">10 минут</button>
+        <button class="pill" data-mins="15">15 минут</button>
+      </div>
+      <button class="btn primary" id="medToggle">Начать</button>
+    </div>
+
+    <div class="breath-stage">
+      <div class="breath-circle-outer">
+        <div class="candle" id="medCandle" aria-hidden="true">
+          <div class="flame"><div class="flame-outer"></div><div class="flame-inner"></div></div>
+          <div class="wick"></div>
+          <div class="wax">
+            <div class="drip drip-a"></div>
+            <div class="drip drip-b"></div>
+            <div class="drip drip-c"></div>
+          </div>
+        </div>
+      </div>
+      <div class="breath-label on-dark" id="medLabel">Готовы?</div>
+      <div class="breath-timer" id="medTimer" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="tool" id="tool">
+  <div class="wrap tool-inner">
+    <div class="tool-copy">
+      <div class="eyebrow">Практика 02 · Попробуйте прямо сейчас</div>
+      <h2>Дыхательный тренажёр</h2>
+      <p>Выберите ритм и следуйте за кругом: вдох на расширении, выдох на сжатии. Достаточно двух минут, чтобы почувствовать разницу.</p>
+      <div class="tool-select" role="group" aria-label="Выбор техники дыхания">
+        <button class="pill" data-mode="box" aria-pressed="true">Квадратное 4-4-4-4</button>
+        <button class="pill" data-mode="calm">Спокойное 4-6</button>
+        <button class="pill" data-mode="478">4-7-8</button>
+      </div>
+      <button class="btn primary" id="breathToggle">Начать</button>
+    </div>
+
+    <div class="breath-stage">
+      <div class="breath-circle-outer">
+        <div class="breath-ring" aria-hidden="true"></div>
+        <div class="breath-circle" id="breathCircle">
+          <span class="breath-label" id="breathLabel">Готовы?</span>
+        </div>
+      </div>
+      <div class="breath-timer" id="breathTimer" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="tool" id="sound">
+  <div class="wrap tool-inner">
+    <div class="tool-copy">
+      <div class="eyebrow">Практика 03</div>
+      <h2>Звуковые сессии</h2>
+      <p>Фоновый шум, который помогает уму отпустить дневную суету. Звук создаётся прямо в браузере — работает даже без интернета.</p>
+      <div class="tool-select" role="group" aria-label="Выбор звука">
+        <button class="pill" data-sound="rain" aria-pressed="true">Дождь</button>
+        <button class="pill" data-sound="ocean">Океан</button>
+        <button class="pill" data-sound="white">Белый шум</button>
+        <button class="pill" data-sound="bowl">Тибетские чаши</button>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <label for="soundVolume" style="font-family:var(--mono); font-size:12px; color:var(--paper-dim);">Громкость</label>
+        <input type="range" id="soundVolume" min="0" max="100" value="45" style="accent-color: var(--sage);">
+      </div>
+      <button class="btn primary" id="soundToggle">Включить</button>
+    </div>
+
+    <div class="breath-stage">
+      <div class="wave-bars" id="waveBars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="breath-timer" id="soundStatus">Тишина</div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-inner">
+    <div>
+      <div class="eyebrow">Философия</div>
+      <h2>Не побег от жизни, а возвращение в неё</h2>
+      <p>Relax Mind — это не про отключение от реальности, а про то, чтобы встречать её с ясной головой. Мы верим, что несколько осознанных минут в день меняют то, как проходит весь остальной день.</p>
+      <p>Практики созданы так, чтобы их можно было встроить в обычный распорядок — до работы, в перерыве или перед сном.</p>
+    </div>
+    <div class="quote">
+      Тишина — не отсутствие звука, а присутствие внимания.
+      <span>— из практики центра</span>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Связаться</div>
+    <h2>Готовы начать?</h2>
+    <p>Напишите нам, чтобы узнать о ближайших сессиях и индивидуальных практиках.</p>
+    <div class="cta-row" style="justify-content:center;">
+      <a href="mailto:hello@relax-mind.uz" class="btn primary" id="emailBtn">hello@relax-mind.uz</a>
+      <a href="https://wa.me/998901743966" target="_blank" rel="noopener" class="btn" style="display:inline-flex; align-items:center; gap:8px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.05 2C6.556 2 2.1 6.457 2.1 11.95c0 1.89.526 3.66 1.44 5.168L2 22l5.02-1.507a9.9 9.9 0 0 0 5.03 1.363c5.494 0 9.95-4.457 9.95-9.95S17.544 2 12.05 2zm0 18.13a8.14 8.14 0 0 1-4.35-1.26l-.312-.188-3.11.933.943-3.032-.203-.313a8.15 8.15 0 0 1-1.267-4.32c0-4.513 3.673-8.186 8.3-8.186 4.513 0 8.186 3.673 8.186 8.186 0 4.626-3.673 8.18-8.187 8.18z"/></svg>
+        Написать в WhatsApp
+      </a>
+    </div>
+    <p style="margin-top:18px; font-size:12px; color:var(--paper-dim); opacity:.75;">Нажмите на email, чтобы скопировать адрес</p>
+  </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite">Email скопирован</div>
+
+<footer>
+  <div>© <span id="year"></span> Relax Mind</div>
+  <div>Ташкент</div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ---- Mobile nav ----
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const navBackdrop = document.getElementById('navBackdrop');
+
+  function openNav(){
+    navMenu.setAttribute('data-open', 'true');
+    navBackdrop.setAttribute('data-open', 'true');
+    navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.setAttribute('aria-label', 'Закрыть меню');
+  }
+  function closeNav(){
+    navMenu.removeAttribute('data-open');
+    navBackdrop.removeAttribute('data-open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Открыть меню');
+  }
+  navToggle.addEventListener('click', function(){
+    if (navToggle.getAttribute('aria-expanded') === 'true') closeNav(); else openNav();
+  });
+  navBackdrop.addEventListener('click', closeNav);
+  navMenu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeNav);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeNav();
+  });
+
+  // ---- Email button: copy to clipboard, keep mailto as a bonus ----
+  const emailBtn = document.getElementById('emailBtn');
+  const toast = document.getElementById('toast');
+  let toastTimer = null;
+
+  function showToast(text){
+    toast.textContent = text;
+    toast.setAttribute('data-visible', 'true');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){
+      toast.removeAttribute('data-visible');
+    }, 2200);
+  }
+
+  emailBtn.addEventListener('click', function(){
+    const email = 'hello@relax-mind.uz';
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(email)
+        .then(function(){ showToast('Email скопирован: ' + email); })
+        .catch(function(){ showToast(email); });
+    } else {
+      showToast(email);
+    }
+    // mailto: still fires normally alongside this — no preventDefault
+  });
+
+  // ---- Breathing tool ----
+  const modes = {
+    box:   { name: 'box',  phases: [ ['Вдох', 4], ['Задержка', 4], ['Выдох', 4], ['Задержка', 4] ] },
+    calm:  { name: 'calm', phases: [ ['Вдох', 4], ['Выдох', 6] ] },
+    478:   { name: '478',  phases: [ ['Вдох', 4], ['Задержка', 7], ['Выдох', 8] ] }
+  };
+
+  let currentMode = 'box';
+  let running = false;
+  let phaseIndex = 0;
+  let secondsLeft = 0;
+  let tickHandle = null;
+
+  const circle = document.getElementById('breathCircle');
+  const label = document.getElementById('breathLabel');
+  const timerEl = document.getElementById('breathTimer');
+  const toggleBtn = document.getElementById('breathToggle');
+  const pills = document.querySelectorAll('.pill');
+
+  pills.forEach(function(pill){
+    pill.addEventListener('click', function(){
+      pills.forEach(function(p){ p.setAttribute('aria-pressed', 'false'); });
+      pill.setAttribute('aria-pressed', 'true');
+      currentMode = pill.dataset.mode;
+      if (running) stopBreathing();
+      resetVisual();
+    });
+  });
+
+  function resetVisual(){
+    circle.style.transform = 'scale(0.7)';
+    circle.style.transitionDuration = '0.6s';
+    label.textContent = 'Готовы?';
+    timerEl.textContent = '';
+  }
+
+  function startBreathing(){
+    running = true;
+    toggleBtn.textContent = 'Остановить';
+    phaseIndex = -1;
+    nextPhase();
+  }
+
+  function stopBreathing(){
+    running = false;
+    toggleBtn.textContent = 'Начать';
+    clearTimeout(tickHandle);
+    resetVisual();
+  }
+
+  function nextPhase(){
+    if (!running) return;
+    const phases = modes[currentMode].phases;
+    phaseIndex = (phaseIndex + 1) % phases.length;
+    const [phaseName, duration] = phases[phaseIndex];
+    secondsLeft = duration;
+
+    label.textContent = phaseName;
+    circle.style.transitionDuration = duration + 's';
+
+    if (phaseName === 'Вдох') {
+      circle.style.transform = 'scale(1.35)';
+    } else if (phaseName === 'Выдох') {
+      circle.style.transform = 'scale(0.7)';
+    }
+    // "Задержка" keeps current scale — no transform change
+
+    tickCountdown();
+  }
+
+  function tickCountdown(){
+    if (!running) return;
+    timerEl.textContent = secondsLeft + ' сек · ' + phaseLabelRu(modes[currentMode].name);
+    if (secondsLeft <= 0){
+      tickHandle = setTimeout(nextPhase, 10);
+      return;
+    }
+    secondsLeft -= 1;
+    tickHandle = setTimeout(tickCountdown, 1000);
+  }
+
+  function phaseLabelRu(modeName){
+    if (modeName === 'box') return 'квадратное дыхание';
+    if (modeName === 'calm') return 'спокойное дыхание';
+    return '4-7-8';
+  }
+
+  toggleBtn.addEventListener('click', function(){
+    if (running){
+      stopBreathing();
+    } else {
+      startBreathing();
+    }
+  });
+
+  // ---- Shared audio context (created on first user interaction) ----
+  let audioCtx = null;
+  function getAudioCtx(){
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
+
+  function playBell(){
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    [660, 990, 1320].forEach(function(freq, i){
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.14 / (i + 1), now + 0.05);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 3.2);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 3.3);
+    });
+  }
+
+  // ---- Meditation timer ----
+  const medPills = document.querySelectorAll('#meditation .pill');
+  const medToggle = document.getElementById('medToggle');
+  const medCandle = document.getElementById('medCandle');
+  const medLabel = document.getElementById('medLabel');
+  const medTimer = document.getElementById('medTimer');
+
+  let medMinutes = 5;
+  let medRunning = false;
+  let medSecondsLeft = 0;
+  let medInterval = null;
+  let medPulse = null;
+
+  medPills.forEach(function(pill){
+    pill.addEventListener('click', function(){
+      medPills.forEach(function(p){ p.setAttribute('aria-pressed', 'false'); });
+      pill.setAttribute('aria-pressed', 'true');
+      medMinutes = parseInt(pill.dataset.mins, 10);
+      if (medRunning) stopMeditation();
+      resetMedVisual();
+    });
+  });
+
+  function resetMedVisual(){
+    medCandle.classList.remove('is-lit', 'is-extinguishing', 'breath-in', 'breath-out');
+    medLabel.textContent = 'Готовы?';
+    medTimer.textContent = '';
+  }
+
+  function formatTime(totalSeconds){
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function startMeditation(){
+    medRunning = true;
+    medToggle.textContent = 'Остановить';
+    medSecondsLeft = medMinutes * 60;
+    medLabel.textContent = 'Наблюдайте';
+    medCandle.classList.remove('is-extinguishing');
+    medCandle.classList.add('is-lit');
+    playBell();
+
+    let breatheIn = false;
+    medPulse = setInterval(function(){
+      breatheIn = !breatheIn;
+      medCandle.classList.toggle('breath-in', breatheIn);
+      medCandle.classList.toggle('breath-out', !breatheIn);
+    }, 4000);
+
+    medInterval = setInterval(function(){
+      medSecondsLeft -= 1;
+      medTimer.textContent = formatTime(medSecondsLeft);
+      if (medSecondsLeft <= 0){
+        stopMeditation(true);
+      }
+    }, 1000);
+
+    medTimer.textContent = formatTime(medSecondsLeft);
+  }
+
+  function stopMeditation(finished){
+    medRunning = false;
+    medToggle.textContent = 'Начать';
+    clearInterval(medInterval);
+    clearInterval(medPulse);
+    medCandle.classList.remove('breath-in', 'breath-out');
+    if (finished){
+      medLabel.textContent = 'Готово';
+      medCandle.classList.remove('is-lit');
+      medCandle.classList.add('is-extinguishing');
+      playBell();
+    }
+    setTimeout(resetMedVisual, finished ? 1400 : 0);
+  }
+
+  medToggle.addEventListener('click', function(){
+    if (medRunning){
+      stopMeditation(false);
+    } else {
+      startMeditation();
+    }
+  });
+
+  // ---- Ambient sound generator ----
+  const soundPills = document.querySelectorAll('#sound .pill');
+  const soundToggle = document.getElementById('soundToggle');
+  const soundStatus = document.getElementById('soundStatus');
+  const soundVolume = document.getElementById('soundVolume');
+  const waveBars = document.querySelectorAll('#waveBars span');
+
+  let currentSound = 'rain';
+  let soundPlaying = false;
+  let noiseSource = null;
+  let noiseGain = null;
+  let noiseFilter = null;
+  let waveInterval = null;
+  let activeNodes = [];
+
+  const soundLabels = { rain: 'Дождь', ocean: 'Океан', white: 'Белый шум', bowl: 'Тибетские чаши' };
+
+  soundPills.forEach(function(pill){
+    pill.addEventListener('click', function(){
+      soundPills.forEach(function(p){ p.setAttribute('aria-pressed', 'false'); });
+      pill.setAttribute('aria-pressed', 'true');
+      currentSound = pill.dataset.sound;
+      if (soundPlaying){
+        stopSound();
+        startSound();
+      }
+    });
+  });
+
+  function makeNoiseBuffer(ctx){
+    const bufferSize = ctx.sampleRate * 2;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++){
+      data[i] = Math.random() * 2 - 1;
+    }
+    return buffer;
+  }
+
+  function startNoiseBed(ctx, masterGain){
+    const buffer = makeNoiseBuffer(ctx);
+
+    noiseSource = ctx.createBufferSource();
+    noiseSource.buffer = buffer;
+    noiseSource.loop = true;
+
+    noiseFilter = ctx.createBiquadFilter();
+    if (currentSound === 'rain'){
+      noiseFilter.type = 'highpass';
+      noiseFilter.frequency.value = 1800;
+    } else if (currentSound === 'ocean'){
+      noiseFilter.type = 'lowpass';
+      noiseFilter.frequency.value = 500;
+    } else {
+      noiseFilter.type = 'allpass';
+      noiseFilter.frequency.value = 1000;
+    }
+
+    noiseSource.connect(noiseFilter).connect(masterGain);
+    noiseSource.start();
+    activeNodes.push(noiseSource, noiseFilter);
+  }
+
+  // Synthesised Tibetan-bowl-like drone: a fundamental plus inharmonic
+  // overtones, each paired with a slightly detuned twin for a slow,
+  // natural "beating" shimmer, topped with a gentle tremolo.
+  function startBowl(ctx, masterGain){
+    const base = 196; // Hz, roughly a mid-size singing bowl
+    const partials = [
+      { ratio: 1,     gain: 0.55 },
+      { ratio: 1.003, gain: 0.45 },
+      { ratio: 2.76,  gain: 0.20 },
+      { ratio: 2.764, gain: 0.16 },
+      { ratio: 5.41,  gain: 0.07 }
+    ];
+
+    const bowlGain = ctx.createGain();
+    bowlGain.gain.value = 1;
+    bowlGain.connect(masterGain);
+    activeNodes.push(bowlGain);
+
+    partials.forEach(function(p){
+      const osc = ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = base * p.ratio;
+      const g = ctx.createGain();
+      g.gain.value = p.gain;
+      osc.connect(g).connect(bowlGain);
+      osc.start();
+      activeNodes.push(osc, g);
+    });
+
+    const lfo = ctx.createOscillator();
+    lfo.type = 'sine';
+    lfo.frequency.value = 0.13;
+    const lfoGain = ctx.createGain();
+    lfoGain.gain.value = 0.15;
+    lfo.connect(lfoGain).connect(bowlGain.gain);
+    lfo.start();
+    activeNodes.push(lfo, lfoGain);
+  }
+
+  function startSound(){
+    const ctx = getAudioCtx();
+
+    noiseGain = ctx.createGain();
+    noiseGain.gain.value = soundVolume.value / 100 * 0.5;
+    noiseGain.connect(ctx.destination);
+    activeNodes.push(noiseGain);
+
+    if (currentSound === 'bowl'){
+      startBowl(ctx, noiseGain);
+    } else {
+      startNoiseBed(ctx, noiseGain);
+    }
+
+    soundPlaying = true;
+    soundToggle.textContent = 'Выключить';
+    soundStatus.textContent = soundLabels[currentSound] + ' · играет';
+
+    waveInterval = setInterval(function(){
+      waveBars.forEach(function(bar){
+        const h = 14 + Math.random() * 120 * (soundVolume.value / 100);
+        bar.style.height = h + 'px';
+      });
+    }, 220);
+  }
+
+  function stopSound(){
+    activeNodes.forEach(function(node){
+      try { if (node.stop) node.stop(); } catch(e){}
+      try { node.disconnect(); } catch(e){}
+    });
+    activeNodes = [];
+    noiseSource = null;
+    noiseFilter = null;
+    noiseGain = null;
+    clearInterval(waveInterval);
+    waveBars.forEach(function(bar){ bar.style.height = '14px'; });
+    soundPlaying = false;
+    soundToggle.textContent = 'Включить';
+    soundStatus.textContent = 'Тишина';
+  }
+
+  soundToggle.addEventListener('click', function(){
+    if (soundPlaying){
+      stopSound();
+    } else {
+      startSound();
+    }
+  });
+
+  soundVolume.addEventListener('input', function(){
+    if (noiseGain){
+      noiseGain.gain.value = soundVolume.value / 100 * 0.5;
+    }
+  });
+</script>
+
+</body>
+</html>
